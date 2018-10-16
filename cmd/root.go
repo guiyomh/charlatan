@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/davecgh/go-spew/spew"
-
 	"github.com/mitchellh/go-homedir"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -21,7 +19,7 @@ var (
 	DbHost  string
 	DbPort  int16
 	cfgFile string
-	cfgName string = ".go-faker-fixtures"
+	cfgName string = ".charlatan"
 )
 
 func init() {
@@ -44,7 +42,6 @@ func init() {
 
 func initConfig() {
 	hasCfgfile := false
-	spew.Dump(cfgFile)
 	if cfgFile != "" {
 		hasCfgfile = true
 		// Use config file from the flag.
@@ -71,10 +68,9 @@ func initConfig() {
 }
 
 var rootCmd = &cobra.Command{
-	Use:   "go-fixtures",
-	Short: "go-fixtures is a very fast fixtures loaders",
-	Long: `A Fast and Flexible fixtures loader built with
-love by guiyomh and friends in ManoMano.`,
+	Use:   "charlatan",
+	Short: "charlatan is a very fast fixtures loaders",
+	Long:  `A Fast and Flexible fixtures loader built with love by guiyomh.`,
 	Run: func(cmd *cobra.Command, args []string) {
 
 	},

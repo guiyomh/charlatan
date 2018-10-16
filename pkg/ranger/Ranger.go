@@ -1,4 +1,4 @@
-package parser
+package ranger
 
 import (
 	"fmt"
@@ -7,11 +7,16 @@ import (
 	"strings"
 )
 
+var numericRangeRegex = regexp.MustCompile(`(?m)\{(?P<min>[0-9]+)\.\.(?P<max>[0-9]+)\}`)
+
 // Ranger parse a object set labe to find a range
 type Ranger struct {
 }
 
-var numericRangeRegex = regexp.MustCompile(`(?m)\{(?P<min>[0-9]+)\.\.(?P<max>[0-9]+)\}`)
+//NewRanger factory to build a Ranger structure
+func NewRanger() *Ranger {
+	return &Ranger{}
+}
 
 //BuildRecordName parse the name of an ObjectSet an generate
 // a list of RecordName

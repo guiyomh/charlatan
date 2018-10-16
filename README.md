@@ -1,96 +1,20 @@
-# Go Faker Fixtures
+# Charlatan - Expressive fixtures generator
 
-## Getting Started
+Relying on [brianvoe/gofakeit](https://github.com/brianvoe/gofakeit), Charlatan allows you to create a ton of fixtures/fake data for use while developing or testing your project.
+It is inspired by [nelmio/alice](https://github.com/nelmio/alice).It gives you a few essential tools to make it very easy to generate complex data in a readable and easy to edit way,
+so that everyone on your team can tweak the fixtures if needed.
 
-#### Download
+## Installation
+
+First, get it:
 
 ```shell
-go get -u github.com/guiyomh/go-faker-fixtures
+go get -u github.com/guiyomh/charlatan
 ```
 ## Example
-
-### 1. Create a Database
-
-```sql
-CREATE TABLE `order` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `seller_id` INT NULL,
-  `customer_id` INT NULL,
-  PRIMARY KEY (`id`));
-
-CREATE TABLE `seller` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `first_name` VARCHAR(60) NULL,
-  `last_name` VARCHAR(65) NULL,
-  PRIMARY KEY (`id`));
-
-CREATE TABLE `customer` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `first_name` VARCHAR(60) NULL,
-  `last_name` VARCHAR(65) NULL,
-  `email` VARCHAR(95) NULL,
-  PRIMARY KEY (`id`));
-
-CREATE TABLE `phone` (
-  `number` VARCHAR(30) NOT NULL,
-  `user_id` INT NOT NULL);
-
-CREATE TABLE `address` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `street_address` VARCHAR(255) NULL,
-  `city` VARCHAR(45) NULL,
-  `zip_code` VARCHAR(20) NULL,
-  `user_id` INT NOT NULL,
-  PRIMARY KEY (`id`));
-
-CREATE TABLE `user` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `first_name` VARCHAR(45) NULL,
-  `last_name` VARCHAR(45) NULL,
-  `pseudo` VARCHAR(45) NOT NULL,
-  `email` VARCHAR(45) NOT NULL,
-  `isAdmin` TINYINT NOT NULL DEFAULT 0,
-  `password` VARCHAR(65) NOT NULL,
-  PRIMARY KEY (`id`));
-```
-
-### 2. Create fixtures
-Create a folder with one or many yaml files
+Here is a complete example of a declaration:
 
 ```yaml
----
-order:
-    order_{1..5}:
-        seller_id: '@seller_<Current()>'
-        customer_id: '@customer_<Current()>'
-
-seller:
-    seller_{1..5}:
-        first_name: '<FirstName()>'
-        last_name: '<LastName()>'
-
-customer:
-    customer_tpl (template):
-        first_name: '<FirstName()>'
-        last_name: '<LastName()>'
-    customer_{1..10} (extends customer_tpl):
-        email : '<Email()>'
-phone:
-    phone_{bob,harry,george}:
-        number: '<PhoneNumber()>'
-        user_id: '@user_<Current()>'
-    phone_2_{bob,george}:
-        number: '<PhoneNumber()>'
-        user_id: '@user_<Current()>'
-address:
-    address_tpl (template):
-        street_address: '<StreetAddress()>'
-        city: '<City()>'
-        zip_code: '<PostCode()>'
-    address_{bob,harry,george} (extends address_tpl):
-        user_id: '@user_<Current()>'
-    address_{1..2} (extends address_tpl):
-        user_id: '@admin_<Current()>'
 user:
     user_tpl (template):
         first_name: '<FirstName()>'
@@ -110,8 +34,12 @@ user:
     user_{bob,harry,george} (extends user_tpl):
         isAdmin: false
 ```
-### 3. Run the commande
+You can then load them easily with:
 
 ```bash
-go-faker-fixtures load --fixtures ./fixtures --user=<your_db_user> --dbname=<your_dbname> --pass=<your_db_pass>
+charlatan load --fixtures ./fixtures --user=<your_db_user> --dbname=<your_dbname> --pass=<your_db_pass>
 ```
+## Compatible databases
+
+* MySQL / MariaDB
+* PostgreSQL (in progress)

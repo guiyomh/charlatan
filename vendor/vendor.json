@@ -19,10 +19,16 @@
 			"revisionTime": "2018-09-23T07:57:13Z"
 		},
 		{
-			"checksumSHA1": "1o1/S71D8UhzBynLH6za9Thf0gI=",
-			"path": "github.com/bxcodec/faker",
-			"revision": "4fc883c366aee07dc236743292ea86a649700b19",
-			"revisionTime": "2018-09-24T05:06:36Z"
+			"checksumSHA1": "uRS0WZkiPGa7X5HPJW7hgWfakS4=",
+			"path": "github.com/brianvoe/gofakeit",
+			"revision": "001277c505b0fe12dd932b9e63f375fcb5b92bb0",
+			"revisionTime": "2018-10-11T19:32:26Z"
+		},
+		{
+			"checksumSHA1": "jxfvtZAalptzCyNUMZ/P4a5u2hc=",
+			"path": "github.com/brianvoe/gofakeit/data",
+			"revision": "001277c505b0fe12dd932b9e63f375fcb5b92bb0",
+			"revisionTime": "2018-10-11T19:32:26Z"
 		},
 		{
 			"checksumSHA1": "2ldat3CW7195KlOFt5uOy9ZUB38=",
@@ -151,6 +157,12 @@
 			"revisionTime": "2018-09-22T18:02:51Z"
 		},
 		{
+			"checksumSHA1": "LuFv4/jlrmFNnDb/5SCSEPAM9vU=",
+			"path": "github.com/pmezard/go-difflib/difflib",
+			"revision": "792786c7400a136282c1664665ae0a8db921c6c2",
+			"revisionTime": "2016-01-10T10:55:54Z"
+		},
+		{
 			"checksumSHA1": "RXdGcEWihBEokWLc+LTy/UnI8OM=",
 			"path": "github.com/spf13/afero",
 			"revision": "d40851caa0d747393da1ffb28f7f9d8b4eeffebd",
@@ -205,6 +217,36 @@
 			"revisionTime": "2018-09-07T13:06:02Z"
 		},
 		{
+			"checksumSHA1": "BBudH/js1dNI/nEfTwsAYUo9l2M=",
+			"path": "github.com/stretchr/objx",
+			"revision": "ef50b0de28773081167c97fc27cf29a0bf8b8c71",
+			"revisionTime": "2018-08-25T06:49:32Z"
+		},
+		{
+			"checksumSHA1": "lVCXJ1WheOQNGxLhEasxjBiP4sU=",
+			"path": "github.com/stretchr/testify",
+			"revision": "04af85275a5c7ac09d16bb3b9b2e751ed45154e5",
+			"revisionTime": "2018-10-09T18:43:15Z"
+		},
+		{
+			"checksumSHA1": "v3LEmqP4Cb6qGCIP7mJk7l2ZXw8=",
+			"path": "github.com/stretchr/testify/assert",
+			"revision": "04af85275a5c7ac09d16bb3b9b2e751ed45154e5",
+			"revisionTime": "2018-10-09T18:43:15Z"
+		},
+		{
+			"checksumSHA1": "fg3TzS9/QK3wZbzei3Z6O8XPLHg=",
+			"path": "github.com/stretchr/testify/http",
+			"revision": "04af85275a5c7ac09d16bb3b9b2e751ed45154e5",
+			"revisionTime": "2018-10-09T18:43:15Z"
+		},
+		{
+			"checksumSHA1": "WmBSFdqpdYRIkp0I408JIZ3LDMY=",
+			"path": "github.com/stretchr/testify/mock",
+			"revision": "04af85275a5c7ac09d16bb3b9b2e751ed45154e5",
+			"revisionTime": "2018-10-09T18:43:15Z"
+		},
+		{
 			"checksumSHA1": "w7Rm7gzY+NkQS2eHkAIF+imEFsY=",
 			"path": "golang.org/x/sys/unix",
 			"revision": "b09afc3d579e346c4a7e4705953acaf6f9e551bd",
@@ -247,5 +289,5 @@
 			"revisionTime": "2018-03-28T19:50:20Z"
 		}
 	],
-	"rootPath": "github.com/guiyomh/go-fixtures"
+	"rootPath": "github.com/guiyomh/go-faker-fixtures"
 }
