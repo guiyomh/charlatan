@@ -3,6 +3,8 @@ package faker
 import (
 	"reflect"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func Test_argConverter(t *testing.T) {
@@ -25,10 +27,33 @@ func Test_argConverter(t *testing.T) {
 		{"Testing a float", args{"3.14", "float"}, "3.14"},
 	}
 	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := argConverter(tt.args.value, tt.args.typeof); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("argConverter() = %v, want %v", got, tt.want)
-			}
-		})
+		got := argConverter(tt.args.value, tt.args.typeof)
+		assert.Equal(t, tt.want, got)
+	}
+}
+
+func TestValue_convert(t *testing.T) {
+	type args struct {
+		val reflect.Value
+	}
+	type testStruct struct {
+		val1 int
+		val2 string
+	}
+	tests := []struct {
+		name string
+		args args
+		want interface{}
+	}{
+		{"test 1", args{val: reflect.ValueOf(true)}, true},
+		{"test 2", args{val: reflect.ValueOf(13)}, "13"},
+		{"test 3", args{val: reflect.ValueOf("foo")}, "foo"},
+		{"test 4", args{val: reflect.ValueOf(testStruct{val1: 16, val2: "foo"})}, testStruct{val1: 16, val2: "foo"}},
+		{"test 5", args{val: reflect.ValueOf(func() string { return "foo" })}, "nothing"},
+	}
+	g := &Value{}
+	for _, tt := range tests {
+		got := g.convert(tt.args.val)
+		assert.Equal(t, tt.want, got)
 	}
 }

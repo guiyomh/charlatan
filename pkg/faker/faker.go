@@ -4,8 +4,6 @@ import (
 	"errors"
 	"reflect"
 
-	"github.com/davecgh/go-spew/spew"
-
 	"github.com/brianvoe/gofakeit"
 )
 
@@ -142,7 +140,6 @@ var funcs = map[string]interface{}{
 
 func Call(m map[string]interface{}, name string, params ...interface{}) (result []reflect.Value, err error) {
 	f := reflect.ValueOf(m[name])
-	spew.Dump(params)
 	if len(params) != f.Type().NumIn() {
 		err = errors.New("the number of params is not adapted.")
 		return

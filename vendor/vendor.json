@@ -43,12 +43,6 @@
 			"revisionTime": "2018-08-30T19:11:22Z"
 		},
 		{
-			"checksumSHA1": "MblnAdBsdgcEN+tc9CN5bRSNiqA=",
-			"path": "github.com/doug-martin/goqu",
-			"revision": "6803bc2ea3462276f0e87814761a787d5537c4eb",
-			"revisionTime": "2018-09-10T00:56:07Z"
-		},
-		{
 			"checksumSHA1": "7NP1qUMF8Kx1y0zANxx0e+oq9Oo=",
 			"path": "github.com/fsnotify/fsnotify",
 			"revision": "ccc981bf80385c528a65fbfdd49bf2d8da22aa23",
@@ -133,12 +127,6 @@
 			"revisionTime": "2018-05-15T20:40:05Z"
 		},
 		{
-			"checksumSHA1": "ZS/wXgKJGvl1ZhJkDCJWyiMJBcY=",
-			"path": "github.com/manveru/faker",
-			"revision": "9fbc68a78c4dbc7914e1a23f88f126bea4383b97",
-			"revisionTime": "2017-11-03T15:27:22Z"
-		},
-		{
 			"checksumSHA1": "a58zUNtDH/gEd6F6KI3FqT2iEo0=",
 			"path": "github.com/mitchellh/go-homedir",
 			"revision": "ae18d6b8b3205b561c79e8e5f69bff09736185f4",
@@ -159,8 +147,8 @@
 		{
 			"checksumSHA1": "LuFv4/jlrmFNnDb/5SCSEPAM9vU=",
 			"path": "github.com/pmezard/go-difflib/difflib",
-			"revision": "792786c7400a136282c1664665ae0a8db921c6c2",
-			"revisionTime": "2016-01-10T10:55:54Z"
+			"revision": "5d4384ee4fb2527b0a1256a821ebfc92f91efefc",
+			"revisionTime": "2018-12-26T10:54:42Z"
 		},
 		{
 			"checksumSHA1": "RXdGcEWihBEokWLc+LTy/UnI8OM=",
@@ -217,34 +205,34 @@
 			"revisionTime": "2018-09-07T13:06:02Z"
 		},
 		{
-			"checksumSHA1": "BBudH/js1dNI/nEfTwsAYUo9l2M=",
+			"checksumSHA1": "cpNsoLqBprpKh+VZTBOZNVXzBEk=",
 			"path": "github.com/stretchr/objx",
-			"revision": "ef50b0de28773081167c97fc27cf29a0bf8b8c71",
-			"revisionTime": "2018-08-25T06:49:32Z"
+			"revision": "c61a9dfcced1815e7d40e214d00d1a8669a9f58c",
+			"revisionTime": "2019-02-11T16:23:28Z"
 		},
 		{
-			"checksumSHA1": "lVCXJ1WheOQNGxLhEasxjBiP4sU=",
+			"checksumSHA1": "DBdcVxnvaINHhWyyGgih/Mel6gE=",
 			"path": "github.com/stretchr/testify",
-			"revision": "04af85275a5c7ac09d16bb3b9b2e751ed45154e5",
-			"revisionTime": "2018-10-09T18:43:15Z"
+			"revision": "34c6fa2dc70986bccbbffcc6130f6920a924b075",
+			"revisionTime": "2019-03-04T09:57:49Z"
 		},
 		{
-			"checksumSHA1": "v3LEmqP4Cb6qGCIP7mJk7l2ZXw8=",
+			"checksumSHA1": "IIsn0Wdi5rHU8xca+FzDd+YeYlc=",
 			"path": "github.com/stretchr/testify/assert",
-			"revision": "04af85275a5c7ac09d16bb3b9b2e751ed45154e5",
-			"revisionTime": "2018-10-09T18:43:15Z"
+			"revision": "34c6fa2dc70986bccbbffcc6130f6920a924b075",
+			"revisionTime": "2019-03-04T09:57:49Z"
 		},
 		{
 			"checksumSHA1": "fg3TzS9/QK3wZbzei3Z6O8XPLHg=",
 			"path": "github.com/stretchr/testify/http",
-			"revision": "04af85275a5c7ac09d16bb3b9b2e751ed45154e5",
-			"revisionTime": "2018-10-09T18:43:15Z"
+			"revision": "34c6fa2dc70986bccbbffcc6130f6920a924b075",
+			"revisionTime": "2019-03-04T09:57:49Z"
 		},
 		{
-			"checksumSHA1": "WmBSFdqpdYRIkp0I408JIZ3LDMY=",
+			"checksumSHA1": "lsdl3fgOiM4Iuy7xjTQxiBtAwB0=",
 			"path": "github.com/stretchr/testify/mock",
-			"revision": "04af85275a5c7ac09d16bb3b9b2e751ed45154e5",
-			"revisionTime": "2018-10-09T18:43:15Z"
+			"revision": "34c6fa2dc70986bccbbffcc6130f6920a924b075",
+			"revisionTime": "2019-03-04T09:57:49Z"
 		},
 		{
 			"checksumSHA1": "w7Rm7gzY+NkQS2eHkAIF+imEFsY=",
@@ -265,29 +253,11 @@
 			"revisionTime": "2018-09-08T17:02:15Z"
 		},
 		{
-			"checksumSHA1": "LiyXfqOzaeQ8vgYZH3t2hUEdVTw=",
-			"path": "google.golang.org/appengine/cloudsql",
-			"revision": "ae0ab99deb4dc413a2b4bd6c8bdd0eb67f1e4d06",
-			"revisionTime": "2018-09-18T20:26:59Z"
-		},
-		{
-			"checksumSHA1": "YN/1C2sQo7YgkD4EBfDfgVznhak=",
-			"path": "gopkg.in/doug-martin/goqu.v5",
-			"revision": "6803bc2ea3462276f0e87814761a787d5537c4eb",
-			"revisionTime": "2018-09-10T00:56:07Z"
-		},
-		{
-			"checksumSHA1": "A/KTLgvzvShS9CelOjISDyK/RvM=",
-			"path": "gopkg.in/doug-martin/goqu.v5/adapters/mysql",
-			"revision": "6803bc2ea3462276f0e87814761a787d5537c4eb",
-			"revisionTime": "2018-09-10T00:56:07Z"
-		},
-		{
 			"checksumSHA1": "ZSWoOPUNRr5+3dhkLK3C4cZAQPk=",
 			"path": "gopkg.in/yaml.v2",
 			"revision": "5420a8b6744d3b0345ab293f6fcba19c978f1183",
 			"revisionTime": "2018-03-28T19:50:20Z"
 		}
 	],
-	"rootPath": "github.com/guiyomh/go-faker-fixtures"
+	"rootPath": "github.com/guiyomh/charlatan"
 }

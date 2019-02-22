@@ -37,4 +37,5 @@ CREATE TABLE `user` (
   `email` VARCHAR(45) NOT NULL,
   `isAdmin` TINYINT NOT NULL DEFAULT 0,
   `password` VARCHAR(65) NOT NULL,
+  `create_at` DATETIME NULL DEFAULT NULL,
   PRIMARY KEY (`id`));

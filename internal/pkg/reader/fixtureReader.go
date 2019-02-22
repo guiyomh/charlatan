@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 
 	"github.com/azer/logger"
-	"github.com/guiyomh/go-faker-fixtures/internal/app/model"
+	"github.com/guiyomh/charlatan/internal/app/model"
 	yaml "gopkg.in/yaml.v2"
 )
 

@@ -13,6 +13,7 @@ user:
       last_name: '<LastName()>'
       pseudo: '<Username()>'
       email : '<Email()>'
+      create_at: '<Date()>'
       password: '<Password(false, false, true, false, false, 6)>'
 
   admin_1:
@@ -22,6 +23,7 @@ user:
       password: 'freedommmmmmm'
       email : 'freedom@gouv.co.uk'
       isAdmin: true
+      create_at: '1305-08-23 06:06:06'
   admin_{2..5} (extends user_tpl):
       isAdmin: true
   user_{bob,harry,george} (extends user_tpl):

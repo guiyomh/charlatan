@@ -22,10 +22,9 @@ ALL = \
 help: ## Show this help.
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
 
-all: deps test build
+all: install test build
 
 tools: ## Install tools
-	go get -u github.com/kardianos/govendor
 	go get -u golang.org/x/tools/cmd/stringer
 	go get -u golang.org/x/tools/cmd/cover
 	go get -u github.com/davecgh/go-spew/spew
@@ -38,17 +37,17 @@ test: fmt vet
 clean: ## Clean Target
 	rm -f $(ALL)
 
-deps:
+install: ## Install deps with govendor
 	govendor sync
 
 lint:
-	golint ./...
+	golint $(ALL_PACKAGES)
 
 fmt:
-	go fmt ./...
+	go fmt $(ALL_PACKAGES)
 
 vet:
-	go vet ./...
+	go vet $(ALL_PACKAGES)
 
 test-cover-html:
 	@echo "mode: count" > coverage-all.out

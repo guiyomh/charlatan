@@ -1,15 +1,13 @@
 package cmd
 
 import (
-	"database/sql"
 	"errors"
 	"fmt"
 	"os"
-	"strings"
 
 	"github.com/azer/logger"
-	"github.com/doug-martin/goqu"
-	reader "github.com/guiyomh/go-faker-fixtures/internal/reader"
+	"github.com/guiyomh/charlatan/internal/pkg/db"
+	"github.com/guiyomh/charlatan/internal/pkg/reader"
 
 	"github.com/spf13/cobra"
 )
@@ -38,25 +36,19 @@ var truncateCmd = &cobra.Command{
 			log.Error(err.Error())
 			panic(err)
 		}
-		dataSource := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8", DbUser, DbPass, DbHost, DbPort, DbName)
-		myDb, err := sql.Open("mysql", dataSource)
+		dbManagerFactory := db.DbManagerFactory{}
+		manager, err := dbManagerFactory.NewDbManager("mysql", DbHost, DbPort, DbUser, DbPass)
 		if err != nil {
-			panic(err.Error())
+			panic(err)
 		}
-		db := goqu.New("mysql", myDb)
-
 		for tableName := range data {
 			log.Info(fmt.Sprintf("Truncate Table : %s", tableName))
-			sql, args, _ := db.From(tableName).ToTruncateSql()
-			fmt.Println(sql)
-			sql = strings.Replace(sql, "\"", "`", -1)
-			_, err := db.Exec(sql, args...)
+			_, err := manager.TruncateTable("fixtures", tableName)
 			if err != nil {
 				fmt.Println(err.Error())
 				panic(err)
 			}
 		}
-		//spew.Dump(tables)
 		timer.End("Parse fixture data")
 	},
 }

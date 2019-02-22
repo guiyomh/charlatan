@@ -45,6 +45,8 @@ func (g *Value) convert(val reflect.Value) interface{} {
 		return val.String()
 	case reflect.Bool:
 		return val.Bool()
+	case reflect.Struct:
+		return val.Interface()
 	default:
 		return "nothing"
 	}

@@ -4,7 +4,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/guiyomh/go-faker-fixtures/cmd"
+	"github.com/guiyomh/charlatan/cmd"
 )
 
 const (

@@ -1,13 +1,13 @@
 package generator
 
 import (
-	"fmt"
 	"regexp"
 	"strings"
 
-	"github.com/guiyomh/go-faker-fixtures/internal/app/model"
-	"github.com/guiyomh/go-faker-fixtures/pkg/faker"
-	"github.com/guiyomh/go-faker-fixtures/pkg/ranger"
+	"github.com/guiyomh/charlatan/internal/app/model"
+	mids "github.com/guiyomh/charlatan/internal/pkg/generator/middleware"
+	"github.com/guiyomh/charlatan/pkg/faker"
+	"github.com/guiyomh/charlatan/pkg/ranger"
 )
 
 var (
@@ -105,6 +105,13 @@ func (g Generator) createRow(rowReference string, objectSet *model.ObjectSet) *m
 	return row
 }
 
+func (g Generator) applyMiddleWare(value interface{}, mids ...middleware) interface{} {
+	for _, m := range mids {
+		value = m(value)
+	}
+	return value
+}
+
 func (g Generator) getDependency(field string, value interface{}, row *model.Row) {
 	if _, ok := value.(string); !ok {
 		return
@@ -117,12 +124,12 @@ func (g Generator) getDependency(field string, value interface{}, row *model.Row
 }
 
 func (g Generator) generateValue(current string, value interface{}) interface{} {
-	typeof := fmt.Sprintf("%T", value)
-	if typeof == "string" && strings.Contains(value.(string), "<Current()>") {
-		value = strings.Replace(value.(string), "<Current()>", current, 1)
-	}
-	if typeof == "string" {
-		value = g.faker.Generate(value.(string))
-	}
+
+	chain := make([]middleware, 0)
+	chain = append(chain, mids.CurrentMiddleware(current))
+	chain = append(chain, mids.FakerMiddleware(g.faker))
+
+	value = g.applyMiddleWare(value, chain...)
+
 	return value
 }
