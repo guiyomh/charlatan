@@ -1,8 +1,7 @@
----
 phone:
     phone_{bob,harry,george}:
-        number: '<PhoneNumber()>'
+        number: '<Phone()>'
         user_id: '@user_<Current()>'
     phone_2_{bob,george}:
-        number: '<PhoneNumber()>'
+        number: '<Phone()>'
         user_id: '@user_<Current()>'

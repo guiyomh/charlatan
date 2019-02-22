@@ -2,14 +2,21 @@ SOURCE = $(wildcard *.go)
 TAG ?= $(shell git describe --tags)
 GOBUILD = go build -ldflags '-w'
 TEST?=./...
-GOFMT_FILES?=$$(find . -name '*.go' | grep -v vendor)
+
+ALL_PACKAGES=$(shell go list ./... | grep -v "vendor")
+
+setup:
+	mkdir -p ${GOPATH}/bin
+	go get -u golang.org/x/lint/golint
+	go get -u github.com/kardianos/govendor
+	go get github.com/mattn/goveralls
 
 ALL = \
 	$(foreach arch,x64 x32,\
 	$(foreach suffix,linux osx windows,\
-		build/go-faker-fixture-$(suffix)-$(arch))) \
+		build/charlatan-$(suffix)-$(arch))) \
 	$(foreach arch,arm arm64,\
-		build/go-faker-fixture-linux-$(arch))
+		build/charlatan-linux-$(arch))
 
 
 help: ## Show this help.
@@ -25,7 +32,7 @@ tools: ## Install tools
 
 build: clean test $(ALL) ## Build all binaries
 
-test: fmtcheck
+test: fmt vet
 	go list $(TEST) | xargs -t -n4 go test $(TESTARGS) -timeout=60s -parallel=4
 
 clean: ## Clean Target
@@ -35,42 +42,39 @@ deps:
 	govendor sync
 
 lint:
-	golint $(GOFMT_FILES)
+	golint ./...
 
 fmt:
-	gofmt -w $(GOFMT_FILES)
+	go fmt ./...
 
-fmtcheck:
-	@sh -c "'$(CURDIR)/scripts/gofmtcheck.sh'"
+vet:
+	go vet ./...
+
+test-cover-html:
+	@echo "mode: count" > coverage-all.out
+	$(foreach pkg, $(ALL_PACKAGES),\
+	ENVIRONMENT=test go test -coverprofile=coverage.out -covermode=count $(pkg);\
+	tail -n +2 coverage.out >> coverage-all.out;)
+	go tool cover -html=coverage-all.out -o coverage.html
 
 vendor-status:
 	@govendor status
 
-run: clean build/go-faker-fixture-osx-x64 ## Build an Run osx
-	LOG=* ./build/go-faker-fixture-osx-x64 load ./fixtures -u fixtures_user -p fixtures_pass -d fixtures
-
-mariadb/start:
-	@docker build -f docker/mariadb/Dockerfile -t gofixtures docker/mariadb
-	@docker run -d -p 3306:3306 --name=gofixtures gofixtures
-
-mariadb/stop:
-	@docker rm -f gofixtures
-
 # os is determined as thus: if variable of suffix exists, it's taken, if not, then
 # suffix itself is taken
 osx = darwin
-build/go-faker-fixture-%-x64: $(SOURCE)
+build/charlatan-%-x64: $(SOURCE)
 	@mkdir -p $(@D)
 	CGO_ENABLED=0 GOOS=$(firstword $($*) $*) GOARCH=amd64 $(GOBUILD) -o $@
 
-build/go-faker-fixture-%-x32: $(SOURCE)
+build/charlatan-%-x32: $(SOURCE)
 	@mkdir -p $(@D)
 	CGO_ENABLED=0 GOOS=$(firstword $($*) $*) GOARCH=386 $(GOBUILD) -o $@
 
-build/go-faker-fixture-linux-arm: $(SOURCE)
+build/charlatan-linux-arm: $(SOURCE)
 	@mkdir -p $(@D)
 	CGO_ENABLED=0 GOOS=linux GOARCH=arm GOARM=6 $(GOBUILD) -o $@
 
-build/go-faker-fixture-linux-arm64: $(SOURCE)
+build/charlatan-linux-arm64: $(SOURCE)
 	@mkdir -p $(@D)
 	CGO_ENABLED=0 GOOS=linux GOARCH=arm64 $(GOBUILD) -o $@

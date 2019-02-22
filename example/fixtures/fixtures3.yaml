@@ -1,9 +1,8 @@
----
 address:
     address_tpl (template):
-        street_address: '<StreetAddress()>'
+        street_address: '<Street()>'
         city: '<City()>'
-        zip_code: '<PostCode()>'
+        zip_code: '<Zip()>'
     address_{bob,harry,george} (extends address_tpl):
         user_id: '@user_<Current()>'
     address_{1..2} (extends address_tpl):
@@ -12,9 +11,10 @@ user:
   user_tpl (template):
       first_name: '<FirstName()>'
       last_name: '<LastName()>'
-      pseudo: '<UserName()>'
-      password: '<Words(2,true)>'
+      pseudo: '<Username()>'
       email : '<Email()>'
+      password: '<Password(false, false, true, false, false, 6)>'
+
   admin_1:
       first_name: 'William'
       last_name: 'Wallace'

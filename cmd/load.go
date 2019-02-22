@@ -6,9 +6,10 @@ import (
 	"os"
 
 	"github.com/azer/logger"
-
+	"github.com/guiyomh/go-faker-fixtures/db"
 	"github.com/guiyomh/go-faker-fixtures/internal/app/model"
-	"github.com/guiyomh/go-faker-fixtures/internal/pkg"
+	"github.com/guiyomh/go-faker-fixtures/internal/generator"
+	reader "github.com/guiyomh/go-faker-fixtures/internal/reader"
 
 	"github.com/spf13/cobra"
 )
@@ -33,21 +34,29 @@ var loadCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		log := logger.New("cmd")
 		timer := log.Timer()
-		Loader := pkg.NewLoader(args[0])
-		Loader.Load()
-		fmt.Printf("NB Rows : %d\n", len(Loader.Rows))
-		//build binary tree
+		fixturePath := args[0]
+		reader := reader.NewFixtureReader()
+		data, err := reader.Read(fixturePath)
+
+		if err != nil {
+			log.Error(err.Error())
+			panic(err)
+		}
+
+		generator := generator.NewGenerator()
+		rows, err := generator.GenerateRecords(data)
+
+		if err != nil {
+			log.Error(err.Error())
+			panic(err)
+		}
 		rowTree := model.NewTree()
-		for _, row := range Loader.Rows {
+		for _, row := range rows {
 			rowTree.Add(row)
 		}
-		timer.End("Build row record with fake data")
-		timer = log.Timer()
-		dataSource := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8", DbUser, DbPass, DbHost, DbPort, DbName)
-		//sqlGenerator := pkg.NewSqlGenerator("mysql", "fixtures_user:fixtures_pass@/fixtures?charset=utf8")
-		fmt.Println(dataSource)
-		sqlGenerator := pkg.NewSqlGenerator("mysql", dataSource)
 
+		dataSource := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8", DbUser, DbPass, DbHost, DbPort, DbName)
+		sqlGenerator := db.NewSqlGenerator("mysql", dataSource)
 		rowTree.Walk(func(key string, value *model.Row) {
 			if value.HasDependencies() {
 				for field, relation := range value.DependencyReference {
@@ -65,6 +74,8 @@ var loadCmd = &cobra.Command{
 			}
 			value.Pk = pk
 		}, true)
+
+		log.Info(fmt.Sprintf("Nb rows : %d", len(rows)))
 
 		timer.End("Insert record in database")
 	},
