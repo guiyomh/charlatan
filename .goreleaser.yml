@@ -1,0 +1,42 @@
+project_name: charlatan
+builds:
+  - id: "charlatan"
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+    goarch:
+      - amd64
+    main: ./cmd/charlatan/
+    binary: charlatan
+    tags:
+      - static
+archives:
+  - id: charlatan
+    name_template: "{{ .Binary }}_{{ .Os }}_{{ .Arch }}"
+    builds:
+      - charlatan
+    format: binary
+brews:
+  - 
+    name: charlatan
+    tap:
+      owner: guiyomh
+      name: charlatan
+      branch: homebrew
+release:
+  github:
+    owner: guiyomh
+    name: charlatan
+checksum:
+  name_template: "checksums.txt"
+snapshot:
+  name_template: "{{ .Tag }}-next"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^Merge branch"
