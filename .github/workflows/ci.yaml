@@ -1,0 +1,72 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - "*"
+  push:
+    branches:
+      - main
+    tags:
+      - v*
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Unit Test
+    strategy:
+      matrix:
+        go: ["1.17.x"]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go }}
+      - uses: extractions/setup-just@v1
+      - run: just test
+        name: all test
+      - uses: codecov/codecov-action@v2
+        name: codecov-umbrella
+        with:
+          files: ./.ignore/coverage.txt
+          verbose: true
+          flags: unittests,spec
+  lint:
+    name: Lint
+    strategy:
+      matrix:
+        go: ["1.17.x"]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go }}
+      - uses: extractions/setup-just@v1
+      - run: just lint
+  snapshot:
+    name: Build snapshot
+    needs: [test, lint]
+    strategy:
+      matrix:
+        go: ["1.17.x"]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go }}
+      - uses: extractions/setup-just@v1
+      - run: just build
+        name: Build snapshot
+      - uses: actions/upload-artifact@v3
+        name: Upload snapshot
+        with:
+          name: snapshot
+          path: dist/
