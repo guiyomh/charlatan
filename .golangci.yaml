@@ -484,6 +484,11 @@ issues:
     - linters:
         - errcheck
       source: defer # TODO: find a way of handling these errors to enable this check
+    
+    - linters:
+      - gochecknoglobals
+      text: "^faker "
+      path: internal/dto/dto\.go
 
     # Exclude some globals variable to built-in injection
     - linters:
@@ -498,6 +503,7 @@ issues:
     - linters:
       - gochecknoglobals
       text: "^date "
+    
 
   # Independently from option `exclude` we use default exclude patterns,
   # it can be disabled by this option. To list all
