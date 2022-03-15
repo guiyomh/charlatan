@@ -1,0 +1,9 @@
+// https://hackandsla.sh/posts/2020-07-12-golang-integration-testing/
+{
+  "licenser.author": "Guillaume Camus <guillaume.camus@gmail.com>",
+  "licenser.license": "AGPLv3",
+  "licenser.projectName": "Charlatan",
+  "licenser.disableAutoHeaderInsertion": true,
+  "licenser.disableAutoSave": true,
+  "go.buildTags": "test"
+}
