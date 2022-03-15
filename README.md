@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/guiyomh/charlatan.svg?branch=master)](https://travis-ci.org/guiyomh/charlatan)
+[![CI](https://github.com/guiyomh/charlatan/actions/workflows/ci.yaml/badge.svg)](https://github.com/guiyomh/charlatan/actions/workflows/ci.yaml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/guiyomh/charlatan)](https://goreportcard.com/report/github.com/guiyomh/charlatan)
-[![codecov](https://codecov.io/gh/guiyomh/charlatan/branch/master/graph/badge.svg)](https://codecov.io/gh/guiyomh/charlatan)
+[![codecov](https://codecov.io/gh/guiyomh/charlatan/branch/main/graph/badge.svg?token=klkJyfMnUB)](https://codecov.io/gh/guiyomh/charlatan)
 
 
 # Charlatan - Expressive fixtures generator
@@ -30,11 +30,11 @@ Here is a complete example of a declaration:
 ```yaml
 user:
     user_tpl (template):
-        first_name: '<FirstName()>'
-        last_name: '<LastName()>'
-        pseudo: '<UserName()>'
-        password: '<Words(2,true)>'
-        email : '<Email()>'
+        first_name: '{firstname}'
+        last_name: '{lastname}'
+        pseudo: '{username}'
+        password: '{words:2,true}'
+        email : '{email}'
     admin_1:
         first_name: 'William'
         last_name: 'Wallace'
